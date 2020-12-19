@@ -49,20 +49,12 @@ const User= new mongoose.model("User", userSchema);
 
 passport.use(User.createStrategy());
 
-passport.serializeUser(function(user, done) {
-  done(null, user.id);
-}) ;
 
-passport.deserializeUser(function(id, done) {
-  User.findById(id, function(err, user) {
-    done(err, user);
-  });
-});//put below model
 
 passport.use(new GoogleStrategy({  //put below deserializeUser
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
-    callbackURL: "https://sharesecrets45.herokuapp.com/auth/google/secrets",
+    callbackURL: "/auth/google/secrets",
     // userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
   },
   function(accessToken, refreshToken, profile, cb) {
@@ -72,6 +64,16 @@ passport.use(new GoogleStrategy({  //put below deserializeUser
     });
   }
 ));
+
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+}) ;
+
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function(err, user) {
+    done(err, user);
+  });
+});//put below model
 
 app.get("/",function(req,res) {
   res.render("home");
