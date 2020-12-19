@@ -62,11 +62,11 @@ passport.deserializeUser(function(id, done) {
 passport.use(new GoogleStrategy({  //put below deserializeUser
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
-    callbackURL: "https://sharesecrets45.herokuapp.com/auth/google/secrets",
+    callbackURL: "/auth/google/secrets",
     // userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
   },
   function(accessToken, refreshToken, profile, cb) {
-    console.log(profile);
+
     User.findOrCreate({ googleId: profile.id }, function (err, user) {
       return cb(err, user);
     });
