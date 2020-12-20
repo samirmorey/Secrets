@@ -28,7 +28,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true});
-mongoose.set("useCreateIndex", true);
+
 
 const userSchema = new mongoose.Schema ({
   email: String,
