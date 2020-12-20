@@ -36,6 +36,7 @@ build/Release
 #node_modules folder should normally be ignored, but I'm including it for students who forget to run npm install
 # node_modules/
 jspm_packages/
+node_modules
 
 # TypeScript v1 declaration files
 typings/
