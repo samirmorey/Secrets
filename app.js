@@ -28,7 +28,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true,useUnifiedTopology: true,useCreateIndex: true});
+mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true,useUnifiedTopology: true});
 
 
 const userSchema = new mongoose.Schema ({
@@ -62,7 +62,7 @@ passport.use(new GoogleStrategy({
     userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
   },
   function(accessToken, refreshToken, profile, cb) {
-
+    console.log(profile);
 
     User.findOrCreate({ googleId: profile.id }, function (err, user) {
       return cb(err, user);
@@ -91,7 +91,7 @@ app.get("/auth/google/secrets",
     callbackURL: "https://sharesecrets45.herokuapp.com/auth/facebook/secret"
   },
   function(accessToken, refreshToken, profile, cb) {
-
+    console.log(profile);
     User.findOrCreate({ googleId: profile.id }, function (err, user) {
       return cb(err, user);
     });
