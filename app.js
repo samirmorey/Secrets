@@ -92,7 +92,7 @@ app.get("/auth/google/secrets",
   },
   function(accessToken, refreshToken, profile, cb) {
 
-    User.findOrCreate({ facebookId: profile.id }, function (err, user) {
+    User.findOrCreate({ googleId: profile.id }, function (err, user) {
       return cb(err, user);
     });
   }
